@@ -1,5 +1,14 @@
 require("dotenv").config();
+
 const express = require('express');
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+
+const privateKey  = fs.readFileSync('ssl/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('ssl/cert.pem', 'utf8');
+
+const credentials = {key: privateKey, cert: certificate};
 
 const app = express();
 
@@ -18,8 +27,21 @@ app.use(function (req, res, next) {
 app.use("/user", userRouter);
 app.use("/product", productRouter);
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: 1,
+    message: "API is up and running :)"
+  })
+})
 
-app.listen(process.env.APP_PORT, () => {
-  console.log("Server up and running on PORT : ",  process.env.APP_PORT);
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app)
+
+httpServer.listen(process.env.APP_PORT_HTTP, () => {
+  console.log("Server up and running on PORT : ",  process.env.APP_PORT_HTTP);
+});
+
+httpsServer.listen(process.env.APP_PORT_HTTPS, () => {
+  console.log("Server up and running on PORT : ",  process.env.APP_PORT_HTTPS);
 });
 
