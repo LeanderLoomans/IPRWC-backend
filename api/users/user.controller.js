@@ -8,7 +8,7 @@ module.exports = {
 
     createUser: (req, res) => {
         let body = req.body;
-        body.info = "{ products: [], quantity: [] }";
+        body.info = '{ "products": [], "quantity": [] }';
         getUserByEmail(body.email, (err, results) => {
             if (err) {
                 console.log(err);
