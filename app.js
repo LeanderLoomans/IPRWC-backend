@@ -35,13 +35,13 @@ app.get("/", (req, res) => {
 })
 
 const httpServer = http.createServer(app);
-//const httpsServer = https.createServer(credentials, app)
+const httpsServer = https.createServer(credentials, app)
 
 httpServer.listen(process.env.APP_PORT_HTTP, () => {
   console.log("Server up and running on PORT : ",  process.env.APP_PORT_HTTP);
 });
 
-// httpsServer.listen(process.env.APP_PORT_HTTPS, () => {
-//   console.log("Server up and running on PORT : ",  process.env.APP_PORT_HTTPS);
-// });
+httpsServer.listen(process.env.APP_PORT_HTTPS, () => {
+  console.log("Server up and running on PORT : ",  process.env.APP_PORT_HTTPS);
+});
 
