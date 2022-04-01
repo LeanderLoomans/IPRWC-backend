@@ -58,7 +58,6 @@ module.exports = {
     },
 
     getSelectProducts: (req, res) => {
-        console.log("body: " + JSON.stringify(req.body))
         cart = req.body.cart;
         cart.push(-1);
         req.body.cart = cart;
