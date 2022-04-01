@@ -90,7 +90,7 @@ module.exports = {
                 console.log(err);
                 return;
             }
-            return res.json({
+            return res.status(200).json({
                 success: 1
             });
         });
@@ -179,7 +179,7 @@ module.exports = {
                 });
             }
             if (!results) {
-                return res.json({
+                return res.status(401).json({
                     success: 0,
                     data: "Invalid email or password"
                 });
